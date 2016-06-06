@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>漂浮回顶部按钮</title>
+<style>
+body{
+height:2000px;
+}
+.rTop{
+width:100px; height:25px;
+text-align:center; font-size:small;
+line-height:25px; border:1px solid #999;
+position:fixed; right:0; bottom:0;
+border-bottom-color:#333; 
+border-right-color:#333; margin:5px;
+cursor:pointer; display:none
+}
+</style>
+<script>
+<!--拖动滚动条或滚动鼠标轮-->
+window.onscroll=function(){
+if(document.body.scrollTop||document.documentElement.scrollTop>0){
+document.getElementById('rTop').style.display="block"
+}else{
+document.getElementById('rTop').style.display="none"
+}
+}
+<!--点击“回到顶部”按钮-->
+function toTop(){
+window.scrollTo('0','0');
+document.getElementById('rTop').style.display="none"
+}
+</script>
+</head>
+<body>
+<div class="rTop" id="rTop" onClick="toTop()">返回顶部</div>
+<h1>顶部</h1>
+<h1>测试</h1><p></p><h1>测试</h1><p></p><h1>测试</h1><p></p>
+<h1>测试</h1><p></p><h1>测试</h1><p></p><h1>测试</h1><p></p>
+<h1>测试</h1><p></p><h1>测试</h1><p></p><h1>测试</h1><p></p>
+<h1>测试</h1><p></p><h1>测试</h1><p></p><h1>测试</h1><p></p>
+<h1>测试</h1><p></p><h1>测试</h1><p></p><h1>测试</h1><p></p>
+<h1>测试</h1><p></p><h1>测试</h1><p></p><h1>测试</h1><p></p>
+<h1>测试</h1><p></p><h1>测试</h1><p></p><h1>测试</h1><p></p>
+<h1>底部</h1>
+</body>
+</html>

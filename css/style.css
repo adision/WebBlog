@@ -1,0 +1,248 @@
+/*-----------------------------------------------------------------------------------*/
+/*	2016-03-31 19:06:2j
+/*-----------------------------------------------------------------------------------*/
+body{
+	-webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+	margin:0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.2px;
+    /*color: #b9b9b9;*/
+	/*background-color:#efefef;*/
+	background-color:#bdbebf;
+	color:black;
+}
+/*-----------------------------------------------------------------------------------*/
+/* 首部(logo 菜单）
+/*-----------------------------------------------------------------------------------*/
+.header{
+	position:fixed;
+	background-color:#2c3e50;
+	height:60px;
+	width:100%;
+}
+span{ 
+	font: 800 1.5em/1  'Open Sans', Impact;
+    font-size: 150%;
+    font-weight: bold;
+}
+.logo img{
+    margin-left: 5%;
+	float:left;
+    height:60px;
+	width:180px;
+}
+
+/*顶部菜单*/
+.menu a{
+	color:#bbb;
+	text-decoration:none;
+}
+ul{
+	list-style:none;
+}
+li{
+	list-style: none;
+}
+.menu a:hover{
+	text-decoration:none;
+	color:white;
+}
+.menu{
+	float:right;
+	padding:0;
+	margin:0;
+	margin-right:5%;
+	width:480px;
+	height:60px;
+} 
+.menu ul li{
+	position:relative;
+	display:block;
+	float:left;
+	width:140px;
+	font-size:25px;
+	text-align:center;
+	line-height:40px;
+}
+.menu ul li a{
+	text-align:center;
+	display: block;
+}
+.menu ul li a:hover{
+	text-decoration:underline;
+}
+.menu ul li ul{
+	display:none;
+}
+.menu ul li:hover ul{
+	padding: 0;
+	top:30px;
+	display:block;
+	position:absolute;
+ 	background-color:#2c3e50;
+	z-index:999;
+}
+.menu ul li:hover ul li{
+	height:40px;
+}
+.menu ul li:hover ul li a{
+	height:50px;
+	font-size:80%;
+}
+.menu ul li ul li a:hover{
+	font-size: 103%;
+    font-weight: bold;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/* 首页座右铭
+/*-----------------------------------------------------------------------------------*/
+.header-bottom{
+	font: 800 1.5em/1  'Open Sans', Impact;
+	color:#ffffff;
+	height:150px;
+	line-height:190px;
+	font-size:30px;	
+	background-color:#2c3e50;
+}
+
+.header-bottom a{
+	margin-left:5%;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/* 主题界面
+/*-----------------------------------------------------------------------------------*/
+.content{
+	height:1900px;
+	z-index:8;
+    margin-left: 4%;
+    margin-right: 5%;
+	margin-top:40px;
+}
+.left{
+	float:left;
+	height:100%;
+	width:75%;
+}
+.right{
+	float:left;
+	margin-left:3%;
+	height:100%;
+	width:22%;
+}
+.search{
+	width:100%;
+	height:30px;
+	background-color:#eee;
+}
+.text1 {
+	color:#777;
+	float:left;
+	left:20px;
+	margin:15px;
+	width:850px;
+	height:500px;
+    /*box-shadow:0 0 0 1px rgba(10,10,10,.2);*/
+	background-color:#fff;
+}
+.text1 a{
+	background-color:#fff;
+}
+
+.left-menu{
+	width:70%;
+	height:30px;
+	margin-top:35px;
+	margin-bottom:0px;
+	padding:0;
+}
+.left-menu-container{
+	float:left;
+	position:relative;
+	list-style:none;
+	left:0px;
+	width:25%;
+	height:100%;
+	color:#bbb;
+	text-align:center;
+	line-height:30px;
+	background-color:#123;
+}
+.display-contant{
+	height:500px;
+	width:70%;
+	line-height:60px;
+	color:#eee;
+	background-color:#2c3e50;
+}
+.thumbnail{
+    box-shadow:0 0 0 0px rgba(10,10,10,.2);
+    display:inline-block;
+    line-height:0;
+    max-width:100%;
+    transition:box-shadow .2s ease-out;
+    border-radius:0;
+    }
+.thumbnail:focus,.thumbnail:hover{
+    box-shadow:0 0 6px 2px rgba(33,153,232,.5)
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*回顶按钮*/
+/*-----------------------------------------------------------------------------------*/
+#shangxia{
+	position:fixed;top:75%;
+	right:66%;
+	display:block;
+	margin-right:-540px;
+	z-index:999;
+	}
+#shang,#comt,#xia{
+	background:url(../image/huadong.png) no-repeat;
+	position:relative;
+	cursor:pointer;
+	height:30px;
+	width:29px;
+	margin:10px 0 0;
+}
+#comt{
+	background-position:left -30px;
+	height:32px;
+}
+#xia{
+	background-position:left -68px;
+}
+#comt:hover{
+	background-position:right -30px;
+}
+#shang:hover{
+	background-position:right 0;
+}
+#xia:hover{
+	background-position:right -68px;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*底部*/
+/*-----------------------------------------------------------------------------------*/
+.bottom{ 
+	margin-bottom: 0;
+	color:#fff;
+    height:160px;
+	background-color:#2c3e50;
+}
+.copyright{
+	text-align:center;
+	font-size:10px;
+	font-family:arial;
+}
+.copyright span{
+	font-family:arial;
+}

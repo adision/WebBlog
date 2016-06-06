@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8";/>
+		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/cpp.css" rel="stylesheet" type="text/css" media="all" />
+		<title>Wonroot</title>
+	</head>
+	<body>
+		<div class="header">
+			<div class="logo">
+				<a href="index.html">
+					<img src="image/logo.png" />
+				</a>
+			</div>
+			<div class="menu">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+
+					<li><a href="#">Project</a>
+						<ul>
+							<li><a href="#">C++</a></li>
+							<li><a href="#">数据库</a></li>
+							<li><a href="#">数据结构</a></li>
+						</ul>
+					</li>
+
+					<li><a href="#">About Me</a>
+						<ul>
+							<li><a href="#">Gtihub</a></li>
+							<li><a href="#">Codding</a></li>
+						</ul>
+					</li>
+
+				</ul>
+
+			</div>
+		</div>
+
+		<div class="header-bottom">
+			<a><span>数据结构课设一（单列表）</span></a>
+		</div>
+
+
+
+		<div class="text">
+			<div class="text-contain">
+				编写一算法，将单链表（带头结点）中，数值重复的节点删除。 使所得到的结果中各节点的值均不相等。</br>
+				<span>测试数据1212121</span></br>
+			</div>
+
+			<div class="text-contain text-header">
+				<a><span>LinkList.h<span></a>
+			</div>
+			<pre>
+				<code>
+	# include &lt;iostream>
+	# include <cstdlib>
+	typedef int ElemType;
+	typedef struct LNode
+	{
+		ElemType data;	
+		struct LNode * next;
+	}LinkList;
+
+	//新建后数据顺序不变
+	void CreateListF(LinkList *&L, ElemType a[], int n);
+
+	//新建后数据顺序倒置
+	void CreateListR(LinkList *&L, ElemType a[], int n);
+
+	void InitList(LinkList *&L);
+
+	void DestoryList(LinkList *&L);
+
+	int ListEmpty(LinkList * L);
+
+	int ListLength(LinkList *L);
+
+	void DisplayList(LinkList * L);
+
+	bool GetElem(LinkList *L, int i, ElemType &e);
+
+	int LocateElem(LinkList *L, const ElemType & e);
+
+	bool ListInsert(LinkList *&L, int i, const ElemType & e);
+
+	//去除链表中相同的元素
+	void delrepeat(LinkList *&L);
+				</code>
+			</pre>
+
+			<div class="text-contain text-header">
+				<a><span>LinkList.cpp<span></a>
+			</div>
+
+			<pre>
+				<code>
+	# include &lt;iostream>
+	# include "LinkList.h"
+
+
+	void CreateListF(LinkList *&L, ElemType a[], int n)
+	{
+		LinkList * s;
+		int i;
+		L = (LinkList *) malloc(sizeof(LinkList));
+		L -> next = NULL;
+		for(i = 0; i < n; i++)
+		{
+			s = (LinkList *) malloc(sizeof(LinkList));
+			s -> data = a[i];
+			s -> next = L -> next;
+			L -> next = s;
+		}
+	}
+
+	void CreateListR(LinkList *&L, ElemType a[], int n)
+	{
+		LinkList * s, *r;
+		int i;
+		L = (LinkList *) malloc(sizeof(LinkList));
+		r = L;
+		for(i = 0; i < n; i++)
+		{
+			s = (LinkList *) malloc(sizeof(LinkList));
+			s -> data = a[i];
+			r -> next = s;
+			r = s;
+		}
+	}
+
+	void InitList(LinkList *&L)
+	{
+		L = (LinkList *) malloc(sizeof(LinkList));
+		L -> next = NULL;
+	}
+
+	void DestoryList(LinkList *&L)
+	{
+		LinkList * pre = L, *p = L -> next;
+		while(p != NULL)
+		{
+			free(pre);
+			pre = p;
+			p = pre -> next;
+		}
+		free(pre);
+	}
+
+	int ListEmpty(LinkList * L)
+	{
+		return (L -> next == NULL);
+	}
+
+	int ListLength(LinkList *L)
+	{
+		int n = 0;
+		LinkList * p = L;
+		while(p -> next != NULL)
+		{
+			n++;
+			p = p -> next;
+		}
+		return n;
+	}
+
+	void DisplayList(LinkList * L)
+	{
+		LinkList * p = L -> next;
+		while(p != NULL)
+		{
+			std::cout << p -> data;
+			p = p -> next;
+		}
+		std::cout << std::endl;
+	}
+
+	bool GetElem(LinkList *L, int i, ElemType &e)
+	{
+		int j = 0;
+		LinkList *p = L;
+		while(j < i && p != NULL)
+		{
+			j++;
+			p = p -> next;
+		}
+		if( p == NULL)
+			return false;
+		e = p -> data;
+		return true;
+	}
+
+	int LocateElem(LinkList *L, const ElemType & e)
+	{
+		int i = 1;	
+		LinkList *p = L -> next;
+		while(p != NULL && p -> data != e)
+		{
+			p = p -> next;
+			i++;
+		}
+		if( p == NULL)
+			return 0;
+		return i;
+	}
+
+	bool ListInsert(LinkList *&L, int i, const ElemType & e)
+	{
+		int j = 0;
+		LinkList *p = L, *s;
+		while(j < i - 1 && p != NULL)
+		{
+			j++;
+			p = p -> next;
+		}
+		if( p == NULL)
+			return false;
+		else
+		{
+			s = (LinkList *) malloc (sizeof(LinkList));
+			s -> data = e;
+			s -> next = p -> next;
+			p -> next = s;
+			return true;
+		}
+		
+	}
+
+	void delrepeat(LinkList *&L)
+	{
+	    LinkList *p = L -> next, *q, *t;
+	    while(p != NULL)
+	    {
+			q = p;
+	        while( q -> next != NULL)
+	        {
+	            if(q -> next -> data == p -> data)
+				{
+					t = q -> next;
+					q -> next = t -> next;
+					free(t);
+				}
+				else
+					q = q -> next;
+	        }
+			p = p -> next;
+	    }
+	}
+				</code>
+			</pre>
+
+			<div class="text-contain text-header">
+				<a><span>main.cpp<span></a>
+			</div>
+			<pre>
+				<code>
+	/*
+	 * 编写一算法，将单链表（带表头节点）中值重复的节点删除，使
+	 * 所得到结果中各节点值各不相同。
+	 * 实验数据121212121
+	 */
+		# include<iostream>
+		# include<cstdio>
+		# include"LinkList.h"
+		using namespace std;
+		int main(void)
+		{
+
+			int a[100];
+			int i = 0;
+			cout << "The Number: ";
+			while((a[i] = getchar()) != '\n')
+			{
+				a[i] -= 48;
+				i++;
+			}
+
+			LinkList * List;
+			CreateListF(List, a, i);
+			DisplayList(List);
+			delrepeat(List);
+			DisplayList(List);
+			return 0;
+		}
+				</code>
+			</pre>
+		</div>
+
+
+</div>
+
+
+		<div class="bottom">
+			<div class="copyright">
+				<a>©2016 TAOROOT</a>
+				<p>本网站<span>（www.Wonroot.com）</span>刊载的所有内容，包括文字、图片、音频、视频、软件、程序、以及网页版式设计等均在网上搜集。<br/>
+				  访问者可将本网站提供的内容或服务用于个人学习、研究或欣赏，以及其他非商业性或非盈利性用途，但同时应遵守著作权法及其他相关法律的规定，不得侵犯本网站及相关权利人的合法权利。<br/>
+				  除此以外，将本网站任何内容或服务用于其他用途时，须征得本网站及相关权利人的书面许可，并支付报酬。<br/>
+				    本网站内容原作者如不愿意在本网站刊登内容，请及时通知本站，予以删除。
+				</p>
+			<div>
+		</div>
+
+	</body>
+</html>
