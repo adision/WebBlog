@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8";/>
+		<link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../css/cpp.css" rel="stylesheet" type="text/css" media="all" />
+		<title>Wonroot</title>
+	</head>
+	<body>
+		<div class="header">
+			<div class="logo">
+				<a href="../index.html">
+					<img src="../image/logo.png" />
+				</a>
+			</div>
+			<div class="menu">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+
+					<li><a href="#">Project</a>
+						<ul>
+							<li><a href="#">C++</a></li>
+							<li><a href="#">数据库</a></li>
+							<li><a href="#">数据结构</a></li>
+						</ul>
+					</li>
+
+					<li><a href="#">About Me</a>
+						<ul>
+							<li><a href="#">Gtihub</a></li>
+							<li><a href="#">Codding</a></li>
+						</ul>
+					</li>
+
+				</ul>
+
+			</div>
+		</div>
+
+		<div class="header-bottom">
+			<a><span>数据结构课设二（栈和队列）</span></a>
+		</div>
+
+
+
+		<div class="text">
+			<div class="text-contain">
+			<a>计算表达式的值。已知表达式中允许使用的
+			运算符包括：+（加）-（减）*（乘）
+			/（除),%（模）和圆括号，运用符的运算规则同C
+			语言语言中的相应的运算符。表达式中的数据都是非负
+			整数。假设表达式为合法表达式，运行时，以字符串的
+			形式输入。</a><br/><br/>
+			<span>测试数据：一个混合使用了全部运算符的表达式</span>
+			</br>
+			</div>
+
+			<div class="text-contain text-header">
+				<a><span>ExpTrans.h<span></a>
+			</div>
+			<pre>
+				<code>
+	# include &lt;iostream>
+	# include &lt;cstring>
+	# include &lt;cstdlib>
+	# include &lt;stack>
+	using namespace std;
+
+	//判断是否为运算符
+	bool isOptMark(char op);
+
+	//优先级判断
+	int prior(char op);
+
+	//中缀表达式转化为后缀表达式, RSP代表后缀表达式表达式
+	string convert(string infixExp,string &RSP);
+
+	//读取数值
+	int readNum(string exp, int &i);
+
+	//通过后缀表达式计算数值
+	int calulate(string RSP);
+
+				</code>
+			</pre>
+
+			<div class="text-contain text-header">
+				<a><span>ExpTran.cpp<span></a>
+			</div>
+			<pre>
+				<code>
+	# include &lt;iostream>
+	# include &lt;cstring>
+	# include &lt;cstdlib>
+	# include &lt;cstring>
+	# include "ExpTrans.h"
+	using namespace std;
+
+	bool isOptMark(char op)
+	{//判断是否为运算符
+		char mark[] = {'+', '-', '*', '/', '(', '%', '\0'};
+		for(int i = 0; mark[i] != '\0'; i++)
+		{
+			if(op == mark[i])
+				return 1;
+		}
+		return 0;
+	}
+
+	int prior(char op)
+	{//优先级
+		struct 
+		{
+			char m;//符号
+			int p;//优先级
+		}pri[] = { {'=', -1}, {'(', 0}, {'+', 1}, {'-', 1},
+			{'*', 2}, {'%', 2}, {'/', 2}, {'\0', -2} };//最后一个元素，仅作结束符使用
+
+		for(int i = 0; pri[i].m != '\0'; i++)
+			if(pri[i].m == op)
+				return pri[i].p;
+		return -1;
+	}
+
+
+	//中缀表达式转化为后缀表达式, RSP代表后缀表达式表达式
+	string convert(string infixExp,string &RSP)
+	{//中缀表达式转后缀表达式
+	    
+	    stack&lt;char> stk;//存储操作符栈
+	    
+	    stk.push('=');//必须要有这个末尾识别符号，否则栈为空的话，会报错！！！
+	    
+	    int length = (int)infixExp.length();//获取表达式的长度
+	    for(int i = 0; i < length; i++)
+		{
+			if(infixExp[i] >= '0' && infixExp[i] <= '9')
+			{
+	            //读入数字的话，直接输出
+	            RSP += infixExp[i];
+	        }
+			else if(infixExp[i] == '(')
+			{
+	            //遇到左括号直接入栈
+	            stk.push(infixExp[i]);
+	        }
+			else if(infixExp[i] == ')')
+			{
+	            //如果遇到右括号的话，就把一直到最近的左括号之间的都弹出来加入RPN中
+	            while(stk.top() != '(')
+				{
+	                RSP += stk.top();
+	                stk.pop();
+	            }
+	            stk.pop();//把左括号弹出栈
+	        }
+			else if(isOptMark(infixExp[i]))
+			{
+	            //用空格把数字和运算符分开，这样就可以计算多位数字了
+	            RSP += ' ';
+	            //如果是运算符的话，比较他们的优先级再决定是否入栈
+	            while( prior(infixExp[i]) <= prior(stk.top()) )
+				{
+	                //如果当前的优先级小于等于栈顶操作符的话，栈顶操作符弹出，加入RSP
+	                RSP += stk.top();
+	                stk.pop();
+	            }
+	            //如果当前的优先级大于栈顶操作符的话，入栈
+	            
+	            stk.push(infixExp[i]);
+	            
+	            
+	        }
+	    }
+
+	    //如果已经扫描到中缀表达式的末尾，就把栈中的操作符都弹出来加入到RSP中
+	    while(!stk.empty())
+		{
+	        RSP += stk.top();
+	        stk.pop();
+	    }
+	    
+	    return RSP;
+	}
+
+	int readNum(string exp, int &i)
+	{
+	    int result = 0;
+	    while(exp[i] >= '0' && exp[i] <= '9')
+		{
+	        result = result * 10 + (exp[i] - '0');
+	        i++;
+	    }
+	    return result;
+	}
+
+	int calulate(string RSP)
+	{//计算后缀表达式的最终数值
+	    int i = 0;
+	    stack&lt;int> optNum;//操作数栈
+	    int x1,x2 = 0;
+	    
+	    while(RSP[i] != '=')
+		{//没有遇到结束标志#，即进行表达式的计算
+	        if(RSP[i] >= '0' && RSP[i] <= '9')
+			{
+	            optNum.push(readNum(RSP, i));//字符串转整数
+	        }
+			else if(RSP[i] == ' ')
+			{
+	            i++;
+	        }
+			else if(RSP[i] == '+')
+			{
+	            x1 = optNum.top();
+	            optNum.pop();
+	            x2 = optNum.top();
+	            optNum.pop();
+	            optNum.push(x1+x2);
+	            i++;
+	        }
+			else if(RSP[i] == '-')
+			{
+	            x1 = optNum.top();
+	            optNum.pop();
+	            x2 = optNum.top();
+	            optNum.pop();
+	            optNum.push(x2-x1);
+	            i++;
+	        }
+			else if(RSP[i] == '*')
+			{
+	            x1 = optNum.top();
+	            optNum.pop();
+	            x2 = optNum.top();
+	            optNum.pop();
+	            optNum.push(x1*x2);
+	            i++;
+	        }
+			else if(RSP[i] == '/')
+			{
+	            x1 = optNum.top();
+	            optNum.pop();
+	            x2 = optNum.top();
+	            optNum.pop();
+	            optNum.push(x2/x1);
+	            i++;
+	        }
+			else if(RSP[i] == '%')
+			{
+	            x1 = optNum.top();
+	            optNum.pop();
+	            x2 = optNum.top();
+	            optNum.pop();
+	            optNum.push(x2%x1);
+	            i++;
+	        }
+
+	    }
+	    return optNum.top();//返回最终的计算结果
+	}
+
+				</code>
+			</pre>
+
+			<div class="text-contain text-header">
+				<a><span>main.cpp<span></a>
+			</div>
+			<pre>
+				<code>
+	#include &lt;iostream>
+	#include "ExpTrans.h"
+	using namespace std;
+
+	int main()
+	{
+		cout << "请输入(q to quit)：";
+	    string infixExp = "";
+		//infixExp = "1*2+3*(4/2)";
+	    while(cin>>infixExp)
+		{
+			if(infixExp == "quit")
+				break;
+	        string RSP = "";
+	        string postFix = convert(infixExp, RSP);//后缀表达式
+	        cout << "后缀表达式为: " << postFix << endl;
+	        int result = calulate(postFix);
+	        cout<<"结果为: "<< result<< endl;
+			cout << "请输入(q to quit)：";
+	    }
+	    return 0;
+	}
+				</code>
+			</pre>
+		</div>
+
+
+		<div class="bottom">
+			<div class="copyright">
+				<a>©2016 TAOROOT</a>
+				<p>本网站<span>（www.Wonroot.com）</span>刊载的所有内容，包括文字、图片、音频、视频、软件、程序、以及网页版式设计等均在网上搜集。<br/>
+				访问者可将本网站提供的内容或服务用于个人学习、研究或欣赏，以及其他非商业性或非盈利性用途，但同时应遵守著作权法及其他相关法律的规定，不得侵犯本网站及相关权利人的合法权利。<br/>
+				除此以外，将本网站任何内容或服务用于其他用途时，须征得本网站及相关权利人的书面许可，并支付报酬。<br/>
+				本网站内容原作者如不愿意在本网站刊登内容，请及时通知本站，予以删除。
+				</p>
+			<div>
+		</div>
+
+	</body>
+</html>
