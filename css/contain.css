@@ -1,0 +1,136 @@
+*{margin:0;padding:0}
+a{text-decoration:none}
+a:hover,a:focus,a:active{text-decoration:none;outline:none;}
+h1,h2,h3,h4,h5,h6{
+	font-weight:normal;
+	margin:0 0 15px;
+	font-family: 'HelveticaNeue' !important;
+}
+input[type=text],input[type=password],textarea{
+	border:1px solid #ddd;
+	padding:5px;
+	outline:none;
+}
+img{
+	max-width:100%;
+	height:auto;
+}
+.content_area{
+	display: block;
+	margin:0;
+	padding:0;
+	background: url(../image/bg.png);
+}
+.fix{
+	overflow: hidden;
+}
+.wrap{
+	margin:0 auto;
+	display: block;
+}
+.floatleft{
+	float:left;
+}
+.main_content{
+	margin-right: 20px;
+	padding: 20px 0;
+}
+.left-content{
+	width:713px;
+	margin-left:15%;
+}
+.single_content_wrapper{
+	margin-left:-15px;
+	margin-bottom:30px;
+}
+
+.single_content{
+	margin-left:35px;
+	margin-bottom: 15px;
+	max-height: 440px;
+	min-height: 440px;
+	height:440px;
+	width:300px;
+	background:#fff;
+}
+.single_content_info{
+	background:none repeat scroll 0 0 #fff;
+	padding: 10px;
+	border:1px solid #999;
+	height:400px;
+	border-top:0;
+}
+.single_content .author{
+	color:#c4c4c4;
+	margin-bottom:15px;
+}
+.post-meta{
+	border-top:2px dotted #999;
+	font-size:11px;
+	margin-top:15px;
+	padding:15px 0;
+}
+.pagination{
+	margin:15px 0;
+}
+.pagination a{
+	background: none repeat scroll 0 0 #fff;
+	display: inline-block;
+	font-weight: bold;
+	padding: 5px 10px;
+}
+
+.sidebar{
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #999999;
+	padding: 19px;
+	width: 240px;
+	margin-top:30px;
+}
+.single_sidebar{
+	margin-bottom:25px;
+	color:#898989;
+}
+.single_sidebar input{
+	width:90%;
+}
+.popular_post > h2,.single_sidebar > h2{
+	border-bottom: 2px dotted #BABABA;
+	color: #6b6b6b;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 22px;
+	padding-bottom: 5px;
+}
+.single_sidebar a{
+	display:block;
+	color:#898989;
+}
+.single_sidebar a:hover{
+	text-decoration:underline;
+}
+.popular_post{
+
+}
+.single_popular{
+	margin-bottom:15px;
+}
+.single_popular img{
+	margin-right: 8px;
+}
+.single_popular h2{
+	color: #898989;
+	font-size: 14px;
+	margin-bottom: 0px;}
+.single_popular p{
+	color: #717171;
+	font-size: 11px;
+}
+.search{
+	height: 30px;
+	width: 80%;
+}
+.single_popular h2:hover{
+	color:#000;
+}
+

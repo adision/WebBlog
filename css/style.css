@@ -12,8 +12,17 @@ body{
     letter-spacing: 0.2px;
     /*color: #b9b9b9;*/
 	/*background-color:#efefef;*/
-	background-color:#bdbebf;
+	/*background-color:#bdbebf*/;
+	background-image:url(../image/bg.png);
 	color:black;
+}
+a{
+	text-decoration:none;
+}
+h1,h2,h3,h4,h5,h6{
+	font-weight:normal;
+	margin:0 0 15px;
+	font-family: 'HelveticaNeue' !important;
 }
 /*-----------------------------------------------------------------------------------*/
 /* 首部(logo 菜单）
@@ -143,12 +152,16 @@ li{
 	width:850px;
 	height:500px;
     /*box-shadow:0 0 0 1px rgba(10,10,10,.2);*/
+
 	background-color:#fff;
 }
 .text1 a{
 	background-color:#fff;
 }
 
+.text-contain{
+	border:1px solid #999;
+}
 
 
 .thumbnail{
@@ -203,11 +216,7 @@ li{
 /*右侧导航栏*/
 /*-----------------------------------------------------------------------------------*/
 .right{
-	position:fixed;
-	height:400px;
-	width:300px;
 	right:0;
-	top:130px;
 }
 
 .left-menu{
